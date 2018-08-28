@@ -91,7 +91,7 @@ export class Formatter extends Lint.Formatters.AbstractFormatter {
     let summaryTable: Array<Array<string>> = [
       [
         chalk.magenta.bold("Rule"),
-        `${chalk.magenta.bold("Count")} (${numberOfFailures} total)`,
+        `${chalk.magenta.bold("Count")} (${numberOfFailures})`,
         `${chalk.magenta.bold("Fixable")} (% issue / % total)`
       ]
     ];
