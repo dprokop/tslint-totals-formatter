@@ -1,0 +1,14 @@
+// Taken from https://github.com/KingHenne/custom-tslint-formatters/
+{
+  "extends": "../node_modules/tslint/lib/configs/recommended.js",
+  "rules": {
+    "quotemark": {
+      "severity": "warning",
+      "options": "single"
+    },
+    "typedef": [
+      true,
+      "call-signature"
+    ]
+  }
+}

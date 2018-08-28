@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": [
+      "es2015",
+      "es2015.collection"
+    ],
+    "strict": true
+  },
+  "files": [
+    "formatters/totalsFormatter.ts",
+  ]
+}
