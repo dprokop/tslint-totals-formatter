@@ -4,12 +4,12 @@ A TSLint formatters that displays short overview of lint problems' scale in your
 
 ## Formatters
 
-### Totals formatter
+### `totals`
 <img width="568" alt="tslint totals formatter" src="docs/totals.png">
 
 Shows issues overview *grouped by rule*. Includes information about the amount of autofixable issues and percentege of each issue type occurence.
 
-### Distribution formatter
+### `issuesDistribution`
 
 <img width="568" alt="tslint distribution formatter" src="docs/distribution.png">
 
@@ -30,11 +30,15 @@ From command line:
 ```
 tslint -c tslint.json --project tsconfig.json -s node_modules/tslint-totals-formatter/formatters -t totals
 ```
+```
+tslint -c tslint.json --project tsconfig.json -s node_modules/tslint-totals-formatter/formatters -t issuesDistribution
+```
 
 From `npm scripts`:
 ```
 {
-  "lint:totals": "tslint -c tslint.json --project tsconfig.json -s node_modules/tslint-totals-formatter/formatters -t totals"
+  "lint:totals": "tslint -c tslint.json --project tsconfig.json -s node_modules/tslint-totals-formatter/formatters -t totals",
+  "lint:distribution": "tslint -c tslint.json --project tsconfig.json -s node_modules/tslint-totals-formatter/formatters -t issuesDistribution",
 }
 ```
 
