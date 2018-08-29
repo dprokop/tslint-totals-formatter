@@ -9,6 +9,8 @@
     "strict": true
   },
   "files": [
+    "formatters/utils.ts",
     "formatters/totalsFormatter.ts",
+    "formatters/issuesDistributionFormatter.ts"
   ]
 }

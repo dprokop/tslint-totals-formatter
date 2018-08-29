@@ -9,6 +9,7 @@ import {
 } from "lodash";
 import { table, TableUserConfig, getBorderCharacters } from "table";
 import chalk from "chalk";
+import { getSummary } from "./utils";
 
 export class Formatter extends Lint.Formatters.AbstractFormatter {
   public format(failures: Lint.RuleFailure[]): string {
@@ -16,70 +17,13 @@ export class Formatter extends Lint.Formatters.AbstractFormatter {
       failure.toJson()
     );
 
-    const summary = this.getSummary(failuresJSON);
+    const summary = getSummary(failuresJSON);
 
     if(failures.length === 0) {
       return '\n';
     }
 
     return '\n' + this.formatSummary(summary, failures.length);
-  }
-
-  private getSummary(failures: Lint.IRuleFailureJson[]) {
-    const failuresSummary = this.getFailuresSummary(failures);
-    const fixableFailuresSummary = this.getFixableFailuresSummary(failures);
-
-    return failuresSummary.map(value => {
-      const fixableEntry = find(fixableFailuresSummary, f => {
-        return f.ruleName === value.ruleName;
-      });
-
-      return {
-        ...value,
-        fixableCount: fixableEntry ? fixableEntry.fixableCount : 0
-      };
-    });
-  }
-
-  private getFailuresSummary(failures: Lint.IRuleFailureJson[]) {
-    const severities = mapValues(groupBy(failures, 'ruleName'), (v, k) => {
-      return v[0].ruleSeverity;
-    })
-
-    return chain(
-      countBy(failures, f => {
-        return f.ruleName;
-      })
-    )
-      .map((val, key) => {
-        return {
-          ruleName: key,
-          count: val,
-          ruleSeverity: severities[key],
-        };
-      })
-      .sortBy("count")
-      .reverse()
-      .toJSON();
-  }
-
-  private getFixableFailuresSummary(failures: Lint.IRuleFailureJson[]) {
-    return chain(
-      countBy(
-        filter(failures, f => {
-          return f.fix !== undefined;
-        }),
-        f => {
-          return f.ruleName;
-        }
-      )
-    )
-      .map((val, key) => {
-        return { ruleName: key, fixableCount: val };
-      })
-      .sortBy("fixableCount")
-      .reverse()
-      .toJSON();
   }
 
   private formatSummary(failuresTotals: Array<{
@@ -123,6 +67,10 @@ export class Formatter extends Lint.Formatters.AbstractFormatter {
       ]);
     });
 
-    return table(summaryTable, tableConfig);
+    const summary =
+      `\n ${chalk.red('✖')} Found ${chalk.bold(numberOfFailures.toString())} issues\n` +
+      `   ${chalk.cyan('For issues distribution across files use issuesDistribution formatter')}\n\n`;
+
+    return summary + table(summaryTable, tableConfig);
   }
 }

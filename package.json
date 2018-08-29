@@ -17,7 +17,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "lint": "tslint -s formatters -t totals test/*.ts",
+    "lint:distribution": "tslint -s formatters -t issues-distribution test/*.ts",
+    "lint:totals": "tslint -s formatters -t totals test/*.ts",
     "prepublish": "yarn build"
   },
   "devDependencies": {

@@ -1,8 +1,19 @@
 # TSLint totals formatter
 
-A TSLint formatter that displays short overview of lint issues' scale in your project.
+A TSLint formatters that displays short overview of lint problems' scale in your project.
 
-<img width="469" alt="tslint totals formatter" src="docs/screenshot.png">
+## Formatters
+
+### Totals formatter
+<img width="568" alt="tslint totals formatter" src="docs/totals.png">
+
+Shows issues overview *grouped by rule*. Includes information about the amount of autofixable issues and percentege of each issue type occurence.
+
+### Distribution formatter
+
+<img width="568" alt="tslint distribution formatter" src="docs/distribution.png">
+
+Shows top 30 files with the highest number of lint issues. Includes information about the amount of autofixable issues and total impact of fixing/autofixing issues per file.
 
 ## Installation
 
